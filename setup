@@ -1,0 +1,44 @@
+#!/bin/bash
+
+BASHRC_INSERT="source ~/scottrc/scottrc"
+BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
+echo $BASHRC_LAST_LINE
+
+if [[ "$BASHRC_LAST_LINE" == "$BASHRC_INSERT" ]]; then
+	echo "Detected stale environment, updating."
+else
+	echo "Detected fresh install."
+	echo "BASHRC_INSERT" >> ~/.bashrc
+fi
+
+echo
+echo "Copying fresh scottrc"
+echo
+
+mkdir -p ~/scottrc
+cp -r scottrc ~/scottrc
+
+echo
+echo "Appending custom scottrc"
+echo
+
+###
+# GIT
+###
+gitversionfull=("$(git --version)")
+if [[ $? -eq 0 ]]; then
+	echo "Found a valid git installation"
+
+	gitversion=${gitversionfull[-1]}
+	requiredver="2.16.0"
+
+	if [ "$(printf '%s\n' "$gitversion" "$requiredver" | sort -V | head -n1)" = "$requiredver" ]; then 
+		echo "Git version greater than $requiredver"
+	else
+		echo "Found git version less than $requiredver, wrapping status save with status push."
+		echo "source scottrc/gitrc" >> ~/scottrc
+	fi
+
+else
+	echo "Git not found, skipping git configuration"
+fi
