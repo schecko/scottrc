@@ -4,8 +4,8 @@ function git() {
         arg2=$2
         shift; shift;
         if [[ $arg1 == "stash" ]] && [[ $arg2 == "push" ]]; then
-                command git stash save $@
+                command git stash save "$@"
         else
-                command git $arg1 $arg2 $@
+                command git $arg1 $arg2 "$@"
         fi
 }
