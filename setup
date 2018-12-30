@@ -38,6 +38,9 @@ else
 	echo "source $DEST/virc" >> $DEST/scottrc
 fi
 
+ln $DEST/init.vim ~/.vimrc
+ln $DEST/init.vim ~/.config/init.vim
+
 ###
 # GIT
 ###
