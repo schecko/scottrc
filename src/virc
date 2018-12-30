@@ -1,0 +1,5 @@
+
+
+alias vim=vi
+alias nvim=vi
+EDITOR=vi

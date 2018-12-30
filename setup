@@ -21,6 +21,22 @@ cp -r src/* $DEST/
 echo
 echo "Appending custom scottrc"
 echo
+###
+# vim
+###
+
+which vim > /dev/null
+VIM_INSTALLED=$?
+which nvim > /dev/null
+NVIM_INSTALLED=$?
+
+if [[ $NVIM_INSTALLED = 0 ]]; then
+	echo "source $DEST/nvimrc" >> $DEST/scottrc
+elif [[ $VIM_INSTALLED = 0 ]]; then
+	echo "source $DEST/vimrc" >> $DEST/scottrc
+else 
+	echo "source $DEST/virc" >> $DEST/scottrc
+fi
 
 ###
 # GIT
