@@ -16,7 +16,7 @@ echo "Copying fresh scottrc"
 echo
 
 mkdir -p $DEST
-cp -r src/* $DEST
+cp -r src/* $DEST/
 
 echo
 echo "Appending custom scottrc"
@@ -36,7 +36,7 @@ if [[ $? -eq 0 ]]; then
 		echo "Git version greater than $requiredver"
 	else
 		echo "Found git version less than $requiredver, wrapping status save with status push."
-		echo "source gitrc" >> $DEST/scottrc
+		echo "source $DEST/gitrc" >> $DEST/scottrc
 	fi
 
 else
