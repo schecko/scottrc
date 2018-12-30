@@ -1,6 +1,6 @@
 #!/bin/bash
-
-BASHRC_INSERT="source ~/scottrc/scottrc"
+DEST=~/.config/scottrc
+BASHRC_INSERT="source $DEST/scottrc"
 BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
 echo $BASHRC_LAST_LINE
 
@@ -15,8 +15,8 @@ echo
 echo "Copying fresh scottrc"
 echo
 
-mkdir -p ~/scottrc
-cp -r scottrc/* ~/scottrc
+mkdir -p $DEST
+cp -r src/* $DEST
 
 echo
 echo "Appending custom scottrc"
@@ -36,7 +36,7 @@ if [[ $? -eq 0 ]]; then
 		echo "Git version greater than $requiredver"
 	else
 		echo "Found git version less than $requiredver, wrapping status save with status push."
-		echo "source gitrc" >> ~/scottrc/scottrc
+		echo "source gitrc" >> $DEST/scottrc
 	fi
 
 else
