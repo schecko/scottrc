@@ -1,7 +1,6 @@
 set nocompatible
 filetype off
 
-filetype plug-in indent on
 set modelines=0
 set wrap
 set textwidth=120
