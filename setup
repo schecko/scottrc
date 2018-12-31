@@ -45,11 +45,12 @@ fi
 ln -s $DEST/init.vim ~/.vimrc
 if [ -e ~/.config/nvim/init.vim ]; then
 	rm ~/.config/nvim/init.vim
-	rm -rf ~/.config/nvim/plugged/*
+	rm -rf ~/.config/nvim/*
 fi
 ln -s $DEST/init.vim ~/.config/nvim/init.vim
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2&>1
-vim +'PlugInstall --sync' +qa
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
+pip install --upgrade neovim
+nvim +'PlugInstall --sync' +qa
 pushd ~/.config/nvim/plugged/youcompleteme
 python3 install.py --clang-completer
 popd
