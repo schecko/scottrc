@@ -1,1 +1,4 @@
-apt-get install build-essential git neovim firefox-esr terminator
+apt-get install build-essential git cmake \
+	neovim python3-dev \
+	firefox-esr terminator sudo
+

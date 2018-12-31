@@ -6,12 +6,14 @@ set wrap
 set textwidth=120
 set showmode
 set showcmd
-set number
+set number relativenumber
+set nu rnu
 set encoding=utf-8
 
 syntax on
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
