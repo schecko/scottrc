@@ -25,23 +25,13 @@ echo
 # vim
 ###
 
-which vim > /dev/null
-VIM_INSTALLED=$?
-which nvim > /dev/null
-NVIM_INSTALLED=$?
-
-if [[ $NVIM_INSTALLED = 0 ]]; then
-	echo "source $DEST/nvimrc" >> $DEST/scottrc
-elif [[ $VIM_INSTALLED = 0 ]]; then
-	echo "source $DEST/vimrc" >> $DEST/scottrc
-else 
-	echo "source $DEST/virc" >> $DEST/scottrc
-fi
+echo "source $DEST/nvimrc" >> $DEST/scottrc
 
 mkdir -p ~/.config/nvim
 if [ -e ~/.vimrc ]; then
 	rm ~/.vimrc
 fi
+
 ln -s $DEST/init.vim ~/.vimrc
 if [ -e ~/.config/nvim/init.vim ]; then
 	rm ~/.config/nvim/init.vim
@@ -54,7 +44,6 @@ nvim +'PlugInstall --sync' +qa
 pushd ~/.config/nvim/plugged/youcompleteme
 python3 install.py --clang-completer
 popd
-
 
 ###
 # GIT
