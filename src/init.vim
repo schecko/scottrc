@@ -26,6 +26,9 @@ let g:lightline = {
 	\ 'colorscheme': 'solarized', 
 	\ }
 
+set wildmenu
+set wildmode=longest:full,full
+
 " Terminal mode window navigation
 tnoremap <M-h> <c-/\><c-n><c-w>h
 tnoremap <M-j> <c-/\><c-n><c-w>j
