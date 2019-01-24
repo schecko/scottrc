@@ -169,4 +169,4 @@ bar {
         status_command i3status
 }
 
-exec --no-startup-id feh --randomize --recursive --reload 1800 --bg-scale /usr/share/backgrounds/
+exec --no-startup-id feh --randomize --recursive --reload 1800 --auto-zoom --bg-scale /usr/share/backgrounds/
