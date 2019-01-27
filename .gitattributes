@@ -1,2 +1,5 @@
-* text=auto eol=lf
+* text eol=lf
+bootstrap text=lf
+install text=lf
+setup text=lf
 
