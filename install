@@ -1,5 +1,8 @@
+apt-get update
+apt-get upgrade
 apt-get install build-essential git cmake python3-pip curl \
 	neovim python3-dev \
 	firefox-esr terminator sudo \
-	feh
+	gnome-shell i3 feh \
+	-y
 

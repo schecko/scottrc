@@ -1,0 +1,9 @@
+#!/bin/bash
+apt-get install git -y
+
+mkdir -p ~/src
+cd ~/src
+git clone https://github.com/schecko/scottrc.gitc
+cd scottrc
+./install
+./setup
