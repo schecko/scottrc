@@ -72,6 +72,7 @@ fi
 ###
 # i3
 ###
-rm ~/.config/i3/config
+mkdir -p ~/.config/i3/
+rm -f ~/.config/i3/config
 ln -s $DEST/i3config ~/.config/i3/config
 
