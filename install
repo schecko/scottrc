@@ -1,4 +1,4 @@
-apt-get install build-essential git cmake \
+apt-get install build-essential git cmake python3-pip curl \
 	neovim python3-dev \
 	firefox-esr terminator sudo \
 	feh
