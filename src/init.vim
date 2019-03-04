@@ -20,11 +20,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'valloric/youcompleteme'
 Plug 'tpope/surround'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'vim-scripts/Conque-GDB'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 set background=dark
+colorscheme desert
 let g:lightline = {
 	\ 'colorscheme': 'solarized', 
 	\ }
