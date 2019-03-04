@@ -30,7 +30,7 @@ let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_pa
 set background=dark
 colorscheme desert
 let g:lightline = {
-	\ 'colorscheme': 'solarized', 
+	\ 'colorscheme': 'solarized',
 	\ }
 
 set wildmenu
@@ -45,4 +45,14 @@ tnoremap <M-l> <c-/\><c-n><c-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-l> <C-w>w
+
+function! RemoveWhiteSpace()
+	let saveCursor = getpos(".")
+	let oldQuery = getreg("/")
+	:%s/\s\+$//e
+	call setpos(".", saveCursor)
+	call setreg("/", oldQuery)
+endfunction
+
+noremap <leader>rw :call RemoveWhiteSpace()<CR>
