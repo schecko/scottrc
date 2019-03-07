@@ -1,5 +1,6 @@
 set nocompatible
 filetype off
+:let mapleader = ","
 
 set modelines=0
 set wrap
@@ -9,6 +10,8 @@ set showcmd
 set number relativenumber
 set nu rnu
 set encoding=utf-8
+set tabstop=4
+set shiftwidth=4
 
 syntax on
 
@@ -56,3 +59,6 @@ function! RemoveWhiteSpace()
 endfunction
 
 noremap <leader>rw :call RemoveWhiteSpace()<CR>
+
+nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
+nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
