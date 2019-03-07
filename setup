@@ -16,7 +16,7 @@ echo "Copying fresh scottrc"
 echo
 
 mkdir -p $DEST
-cp -r src/* $DEST/
+cp -r home/* $DEST/
 
 echo
 echo "Appending custom scottrc"
