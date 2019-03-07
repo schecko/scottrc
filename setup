@@ -1,13 +1,13 @@
 #!/bin/bash
-DEST=~/.config/scottrc
-BASHRC_INSERT="source $DEST/scottrc"
+BASHRC_INSERT="source ~/scottrc"
 BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
 
 clean() {
-	rm -r ~/.config/nvim
-	rm -r ~/.config/i3
+	rm -r ~/.config/nvim/
+	rm -r ~/.config/i3/
 	rm  ~/.vimrc
 	rm  ~/.config/scottrc
+	rm ~/.gitconfig
 }
 
 baseInstall() {
@@ -22,8 +22,7 @@ baseInstall() {
 	echo "Copying fresh scottrc"
 	echo
 
-	mkdir -p $DEST
-	cp -r home/* $DEST/
+	cp -r home/* ~/
 }
 
 configureNeovim() {
@@ -32,7 +31,7 @@ configureNeovim() {
 	###
 
 	mkdir -p ~/.config/nvim/plugged/youcompleteme
-	ln -s $DEST/init.vim ~/.config/nvim/init.vim
+	ln -s ~/init.vim ~/.config/nvim/init.vim
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
 	pip3 install --upgrade neovim
 	nvim +'PlugInstall --sync' +qa
@@ -56,7 +55,7 @@ configureGit() {
 			echo "Git version greater than $requiredver"
 		else
 			echo "Found git version less than $requiredver, wrapping status save with status push."
-			echo "source $DEST/gitrc" >> $DEST/scottrc
+			echo "source ~/gitrc" >> ~/scottrc
 		fi
 
 	else
@@ -65,11 +64,12 @@ configureGit() {
 }
 
 
-if [[ $! == "quick" || $1 == "q" ]]; then
+if [[ $1 == "quick" || $1 == "q" ]]; then
 	baseInstall
 else
 	clean
 	baseInstall
-	configureVim
+	configureNeovim
 	configureGit
 fi
+
