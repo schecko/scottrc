@@ -2,77 +2,74 @@
 DEST=~/.config/scottrc
 BASHRC_INSERT="source $DEST/scottrc"
 BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
-echo $BASHRC_LAST_LINE
 
-if [[ "$BASHRC_LAST_LINE" == "$BASHRC_INSERT" ]]; then
-	echo "Detected stale environment, updating."
-else
-	echo "Detected fresh install."
-	echo "$BASHRC_INSERT" >> ~/.bashrc
-fi
+clean() {
+	rm -r ~/.config/nvim
+	rm -r ~/.config/i3
+	rm  ~/.vimrc
+	rm  ~/.config/scottrc
+}
 
-echo
-echo "Copying fresh scottrc"
-echo
-
-mkdir -p $DEST
-cp -r home/* $DEST/
-
-echo
-echo "Appending custom scottrc"
-echo
-###
-# vim
-###
-
-echo "source $DEST/nvimrc" >> $DEST/scottrc
-
-mkdir -p ~/.config/nvim
-if [ -e ~/.vimrc ]; then
-	rm ~/.vimrc
-fi
-
-ln -s $DEST/init.vim ~/.vimrc
-if [ -e ~/.config/nvim/init.vim ]; then
-	rm ~/.config/nvim/init.vim
-	rm -rf ~/.config/nvim/*
-fi
-
-mkdir -p ~/.config/nvim/plugged/youcompleteme
-ln -s $DEST/init.vim ~/.config/nvim/init.vim
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
-pip3 install --upgrade neovim
-nvim +'PlugInstall --sync' +qa
-pushd ~/.config/nvim/plugged/youcompleteme
-python3 install.py --clang-completer
-popd
-
-###
-# GIT
-###
-gitversionfull=($(git --version))
-if [[ $? -eq 0 ]]; then
-	echo "Found a valid git installation"
-
-	gitversion=${gitversionfull[-1]}
-	requiredver="2.16.0"
-	echo "git version is $gitversion"
-	if [ "$(printf '%s\n%s\n' "$gitversion" "$requiredver" | sort -V | head -n1)" = "$requiredver" ]; then 
-		echo "Git version greater than $requiredver"
+baseInstall() {
+	if [[ "$BASHRC_LAST_LINE" == "$BASHRC_INSERT" ]]; then
+		echo "Detected stale environment, updating."
 	else
-		echo "Found git version less than $requiredver, wrapping status save with status push."
-		echo "source $DEST/gitrc" >> $DEST/scottrc
+		echo "Detected fresh install."
+		echo "$BASHRC_INSERT" >> ~/.bashrc
 	fi
 
+	echo
+	echo "Copying fresh scottrc"
+	echo
+
+	mkdir -p $DEST
+	cp -r home/* $DEST/
+}
+
+configureNeovim() {
+	###
+	# vim
+	###
+
+	mkdir -p ~/.config/nvim/plugged/youcompleteme
+	ln -s $DEST/init.vim ~/.config/nvim/init.vim
+	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
+	pip3 install --upgrade neovim
+	nvim +'PlugInstall --sync' +qa
+	pushd ~/.config/nvim/plugged/youcompleteme
+	python3 install.py --clang-completer
+	popd
+}
+
+configureGit() {
+	###
+	# git
+	###
+	gitversionfull=($(git --version))
+	if [[ $? -eq 0 ]]; then
+		echo "Found a valid git installation"
+
+		gitversion=${gitversionfull[-1]}
+		requiredver="2.16.0"
+		echo "git version is $gitversion"
+		if [ "$(printf '%s\n%s\n' "$gitversion" "$requiredver" | sort -V | head -n1)" = "$requiredver" ]; then 
+			echo "Git version greater than $requiredver"
+		else
+			echo "Found git version less than $requiredver, wrapping status save with status push."
+			echo "source $DEST/gitrc" >> $DEST/scottrc
+		fi
+
+	else
+		echo "Git not found, skipping git configuration"
+	fi
+}
+
+
+if [[ $! == "quick" || $1 == "q" ]]; then
+	baseInstall
 else
-	echo "Git not found, skipping git configuration"
+	clean
+	baseInstall
+	configureVim
+	configureGit
 fi
-
-
-###
-# i3
-###
-mkdir -p ~/.config/i3/
-rm -f ~/.config/i3/config
-ln -s $DEST/i3config ~/.config/i3/config
-
