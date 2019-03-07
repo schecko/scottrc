@@ -10,8 +10,8 @@ set showcmd
 set number relativenumber
 set nu rnu
 set encoding=utf-8
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 syntax on
 
