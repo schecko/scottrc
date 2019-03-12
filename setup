@@ -17,7 +17,7 @@ baseInstall() {
 	echo
 
 	shopt -s dotglob
-	cp -r home/* ~/
+	cp -r ~/src/scottrc/home/* ~/
 	shopt -u dotglob
 }
 

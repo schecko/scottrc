@@ -58,7 +58,7 @@ function! RemoveWhiteSpace()
 	call setreg("/", oldQuery)
 endfunction
 
-noremap <leader>rw :call RemoveWhiteSpace()<CR>
+noremap FileWritePre * :call RemoveWhiteSpace()
 
 nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
 nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
