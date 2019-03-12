@@ -16,8 +16,7 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=HISTFILESIZE= #infinite length
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -87,20 +86,6 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -111,3 +96,24 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+alias la='ls -a'
+alias ll='ls -l'
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias reload="~/src/scottrc/setup q"
+
+alias poweroff='systemctl poweroff'
+alias shutdown='systemctl poweroff'
+alias restart='systemctl restart'
+alias sleep='systemctl suspend'
+
+export EDITOR=nvim
+export VISUAL=nvim
+export GIT_EDITOR=nvim
+
+command vim > /dev/null 2>&1
+if [[ $? != 0 ]]; then
+	alias vim='nvim'
+fi
+
+eval $(thefuck --alias)
