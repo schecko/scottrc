@@ -5,7 +5,7 @@ apt-get update
 apt-get upgrade
 apt-get install build-essential git cmake python3-pip curl \
 	python3-dev sudo \
-	firefox-esr terminator sudo thefuck \
+	firefox-esr terminator sudo thefuck exuberant-ctags \
 	gnome-shell i3 feh \
 	-y
 

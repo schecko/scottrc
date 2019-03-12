@@ -12,6 +12,8 @@ set nu rnu
 set encoding=utf-8
 set tabstop=2
 set shiftwidth=2
+set splitbelow
+set splitright
 
 syntax on
 
@@ -27,6 +29,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/Conque-GDB'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags' "Depends on vim-misc!
 call plug#end()
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
