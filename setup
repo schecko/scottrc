@@ -1,4 +1,4 @@
-w!/bin/bash
+#!/bin/bash
 BASHRC_INSERT="source ~/.config/scottrc"
 BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
 
