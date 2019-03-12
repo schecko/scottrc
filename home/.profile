@@ -8,6 +8,11 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+export EDITOR=nvim
+export VISUAL=nvim
+export GIT_EDITOR=nvim
+export BROWSER=firefox
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
