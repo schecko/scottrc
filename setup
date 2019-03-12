@@ -1,5 +1,4 @@
 #!/bin/bash
-BASHRC_INSERT="source ~/.config/scottrc"
 BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
 
 clean() {
@@ -9,16 +8,10 @@ clean() {
 	rm -f ~/.config/gitrc
 	rm -f ~/.gitconfig
 	rm -f ~/.vimrc
+	rm -f ~/.bashrc
 }
 
 baseInstall() {
-	if [[ "$BASHRC_LAST_LINE" == "$BASHRC_INSERT" ]]; then
-		echo "Detected stale environment, updating."
-	else
-		echo "Detected fresh install."
-		echo "$BASHRC_INSERT" >> ~/.bashrc
-	fi
-
 	echo
 	echo "Copying fresh scottrc"
 	echo
