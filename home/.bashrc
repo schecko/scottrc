@@ -1,6 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+shopt -s autocd #executes cd just from specifying a folder
 
 # If not running interactively, don't do anything
 case $- in
@@ -75,12 +73,12 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -97,8 +95,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias la='ls -a'
-alias ll='ls -l'
+alias la='ls -a --color=auto'
+alias ll='ls -l --color=auto'
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias reload="~/src/scottrc/setup q"
 
