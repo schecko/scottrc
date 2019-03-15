@@ -24,7 +24,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'valloric/youcompleteme'
-Plug 'tpope/surround'
+Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/Conque-GDB'
@@ -71,11 +71,14 @@ nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1
 nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
 
 " global search
-let g:gackprg = "ag --vimgrep"
+let g:gackprg = "ag --vimgrep --hidden"
 let g:grepprg = "ag --nogroup --nocolor"
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:EasyGrepCommand = "ag"
 let g:EasyGrepRecursive = 1
+
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --ignore ".git" -g ""'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " easytags
 let g:easytags_async = 1
