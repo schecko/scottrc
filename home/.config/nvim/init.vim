@@ -1,6 +1,6 @@
 set nocompatible
 filetype off
-:let mapleader = ","
+:let mapleader = " "
 
 set modelines=0
 set wrap
@@ -32,6 +32,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags' "Depends on vim-misc!
+Plug 'mileszs/ack.vim'
 call plug#end()
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
@@ -67,3 +68,5 @@ noremap FileWritePre * :call RemoveWhiteSpace()
 
 nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
 nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+
+let gackprg = "ag --vimgrep"
