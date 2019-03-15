@@ -33,6 +33,7 @@ Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags' "Depends on vim-misc!
 Plug 'mileszs/ack.vim'
+Plug 'dkprice/vim-easygrep'
 call plug#end()
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
@@ -69,4 +70,12 @@ noremap FileWritePre * :call RemoveWhiteSpace()
 nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
 nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
 
-let gackprg = "ag --vimgrep"
+" global search
+let g:gackprg = "ag --vimgrep"
+let g:grepprg = "ag --nogroup --nocolor"
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:EasyGrepCommand = "ag"
+let g:EasyGrepRecursive = 1
+
+" easytags
+let g:easytags_async = 1
