@@ -76,7 +76,8 @@ let g:grepprg = "ag --nogroup --nocolor"
 let g:EasyGrepCommand = "ag"
 let g:EasyGrepRecursive = 1
 
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --ignore ".git" -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore ".git" -g ""'
+:autocmd VimEnter */scottrc let g:ctrlp_user_command = g:ctrlp_user_command . ' --hidden'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
