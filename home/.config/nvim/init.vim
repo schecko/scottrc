@@ -2,10 +2,10 @@ set nocompatible
 set modelines=0
 set wrap
 set textwidth=120
-set showmode
+" no need for showmode while using lightline
+set noshowmode
 set showcmd
 set number relativenumber
-set nu rnu
 set encoding=utf-8
 set tabstop=4
 set shiftwidth=4
@@ -86,9 +86,10 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:EasyGrepCommand = "ag"
 let g:EasyGrepRecursive = 1
 
-"  lightline.vim
+" lightline.vim
+" some good colorschemes: molokai, solarized, darcula
 let g:lightline = {
-\	'colorscheme': 'jellybeans',
+\	'colorscheme': 'molokai',
 \	'active': {
 \		'left': [
 \ 			[ 'mode', 'paste' ],
