@@ -67,20 +67,20 @@ Plug 'xolox/vim-misc'
 call plug#end()
 
 " ctrlp.vim
-	let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore ".git" -g ""'
-	function! DetectDotfilesFolder()
-		" detect if the current folder contains this repo, if it does then
-		" let ctrlp search for dotfiles as well as normal files.
-		" autocmd folder specification does not work well for this case
-		" as it only checks against subfolders. ie specifying ~/src/scottrc/*
-		" will not work if nvim is opened with no arguments within the ~/src/scottrc.
-		if getcwd() =~? ".*scottrc.*"
-			let g:ctrlp_user_command = g:ctrlp_user_command . ' --hidden'
-		endif
-	endfunction
-	autocmd VimEnter * :call DetectDotfilesFolder()
-	let g:ctrlp_show_hidden = 1
-	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore ".git" -g ""'
+function! DetectDotfilesFolder()
+	" detect if the current folder contains this repo, if it does then
+	" let ctrlp search for dotfiles as well as normal files.
+	" autocmd folder specification does not work well for this case
+	" as it only checks against subfolders. ie specifying ~/src/scottrc/*
+	" will not work if nvim is opened with no arguments within the ~/src/scottrc.
+	if getcwd() =~? ".*scottrc.*"
+		let g:ctrlp_user_command = g:ctrlp_user_command . ' --hidden'
+	endif
+endfunction
+autocmd VimEnter * :call DetectDotfilesFolder()
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " vim-easygrep
 let g:EasyGrepCommand = "ag"
