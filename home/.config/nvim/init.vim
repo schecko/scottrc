@@ -1,7 +1,4 @@
 set nocompatible
-filetype off
-:let mapleader = " "
-
 set modelines=0
 set wrap
 set textwidth=120
@@ -14,37 +11,17 @@ set tabstop=2
 set shiftwidth=2
 set splitbelow
 set splitright
-
-syntax on
-
-call plug#begin('~/.config/nvim/plugged')
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'valloric/youcompleteme'
-Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'vim-scripts/Conque-GDB'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'majutsushi/tagbar'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags' "Depends on vim-misc!
-Plug 'mileszs/ack.vim'
-Plug 'dkprice/vim-easygrep'
-call plug#end()
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-
-set background=dark
-colorscheme desert
-let g:lightline = {
-	\ 'colorscheme': 'solarized',
-	\ }
-
+set hidden
 set wildmenu
 set wildmode=longest:full,full
+set background=dark
+
+let mapleader = " "
+let g:grepprg = "ag --nogroup --nocolor"
+
+syntax on
+filetype on
+colorscheme desert
 
 " Terminal mode window navigation
 tnoremap <M-h> <c-/\><c-n><c-w>h
@@ -57,6 +34,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>w
 
+" add a newline without entering insert mode
+nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
+nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
 	let oldQuery = getreg("/")
@@ -65,21 +46,64 @@ function! RemoveWhiteSpace()
 	call setreg("/", oldQuery)
 endfunction
 
-noremap FileWritePre * :call RemoveWhiteSpace()
+autocmd BufWritePre * :call RemoveWhiteSpace()
 
-nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
-nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+call plug#begin('~/.config/nvim/plugged')
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dkprice/vim-easygrep'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'valloric/youcompleteme'
+Plug 'vim-scripts/Conque-GDB'
+Plug 'xolox/vim-easytags' "Depends on vim-misc!
+Plug 'xolox/vim-misc'
+call plug#end()
 
-" global search
-let g:gackprg = "ag --vimgrep --hidden"
-let g:grepprg = "ag --nogroup --nocolor"
+" ctrlp.vim
+	let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore ".git" -g ""'
+	function! DetectDotfilesFolder()
+		" detect if the current folder contains this repo, if it does then
+		" let ctrlp search for dotfiles as well as normal files.
+		" autocmd folder specification does not work well for this case
+		" as it only checks against subfolders. ie specifying ~/src/scottrc/*
+		" will not work if nvim is opened with no arguments within the ~/src/scottrc.
+		if getcwd() =~? ".*scottrc.*"
+			let g:ctrlp_user_command = g:ctrlp_user_command . ' --hidden'
+		endif
+	endfunction
+	autocmd VimEnter * :call DetectDotfilesFolder()
+	let g:ctrlp_show_hidden = 1
+	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" vim-easygrep
 let g:EasyGrepCommand = "ag"
 let g:EasyGrepRecursive = 1
 
-let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore ".git" -g ""'
-autocmd VimEnter ~/src/scottrc/* let g:ctrlp_user_command = g:ctrlp_user_command . ' --hidden'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" lightline.vim
+let g:lightline = { 'colorscheme': 'jellybeans' }
 
-" easytags
+" fzf.vim
+" tagbar
+" ack.vim
+let g:gackprg = "ag --vimgrep --hidden"
+
+" nerdtree
+" syntastic
+" vim-fugitive
+" vim-surround
+" youcompleteme
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" Conque-GDB
+" vim-easytags
 let g:easytags_async = 1
+
+" vim-misc
+
