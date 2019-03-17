@@ -115,6 +115,9 @@ let g:gackprg = "ag --vimgrep --hidden"
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gb :GBlame<CR>
+" TODO
+" 	rebind - to s for "stage" in the staging page
+" 	rebind = to d for "diff" in the staging page?
 " vim-surround
 " youcompleteme
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
