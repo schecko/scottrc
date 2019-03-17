@@ -7,8 +7,8 @@ set showcmd
 set number relativenumber
 set nu rnu
 set encoding=utf-8
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set splitbelow
 set splitright
 set hidden
@@ -58,7 +58,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-fugitive'
+Plug 'schecko/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
 Plug 'vim-scripts/Conque-GDB'
@@ -86,8 +86,20 @@ call plug#end()
 let g:EasyGrepCommand = "ag"
 let g:EasyGrepRecursive = 1
 
-" lightline.vim
-let g:lightline = { 'colorscheme': 'jellybeans' }
+"  lightline.vim
+let g:lightline = {
+\	'colorscheme': 'jellybeans',
+\	'active': {
+\		'left': [
+\ 			[ 'mode', 'paste' ],
+\			[ 'filename', 'paste' ],
+\			[ 'readonly', 'gitstatus' ]
+\		]
+\ 	},
+\ 	'component_function': {
+\		'gitstatus': 'FugitiveStatusline'
+\ 	}
+\}
 
 " fzf.vim
 " tagbar
@@ -97,6 +109,9 @@ let g:gackprg = "ag --vimgrep --hidden"
 " nerdtree
 " syntastic
 " vim-fugitive
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gb :GBlame<CR>
 " vim-surround
 " youcompleteme
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
