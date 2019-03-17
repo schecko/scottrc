@@ -37,6 +37,8 @@ nnoremap <C-l> <C-w>w
 " add a newline without entering insert mode
 nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
 nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+" toggle search highlighting
+nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
