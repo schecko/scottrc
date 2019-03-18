@@ -111,6 +111,17 @@ let g:lightline = {
 let g:gackprg = "ag --vimgrep --hidden"
 
 " nerdtree
+function! DetectEmptyBuffer()
+	return line("$") == 1 && getline(1) == ""
+endfunction
+
+function! OpenNerdTreeOnEnter()
+	if DetectEmptyBuffer()
+		NERDTree
+	endif
+endfunction
+autocmd VimEnter * :call OpenNerdTreeOnEnter()
+autocmd BufReadPre * :NERDTreeClose
 " syntastic
 " vim-fugitive
 nnoremap <leader>gs :Gstatus<CR>
