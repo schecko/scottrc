@@ -105,7 +105,7 @@ alias shutdown='systemctl poweroff'
 alias restart='systemctl restart'
 alias sleep='systemctl suspend'
 
-command vim > /dev/null 2>&1
+command vim --version > /dev/null 2>&1
 if [[ $? != 0 ]]; then
 	alias vim='nvim'
 fi
