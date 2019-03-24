@@ -1,20 +1,22 @@
-set nocompatible
-set modelines=0
-set wrap
-set textwidth=120
-" no need for showmode while using lightline
-set noshowmode
-set showcmd
-set number relativenumber
+set background=dark
 set encoding=utf-8
-set tabstop=4
+set hidden
+" no need for showmode while using lightline
+set modelines=0
+set nocompatible
+set noshowmode
+set number relativenumber
+" always keep lines visible above/below the cursor
+set scrolloff=10
 set shiftwidth=4
+set showcmd
 set splitbelow
 set splitright
-set hidden
+set tabstop=4
+set textwidth=120
 set wildmenu
 set wildmode=longest:full,full
-set background=dark
+set wrap
 
 let mapleader = " "
 let g:grepprg = "ag --nogroup --nocolor"
@@ -33,13 +35,17 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>w
-inoremap jj <ESC>
 
 " add a newline without entering insert mode
 nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
 nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
 " toggle search highlighting
 nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+
+inoremap jk <ESC>
+" swap ; with :, I use ex command much more often than ;
+nnoremap ; :
+nnoremap : ;
 
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
