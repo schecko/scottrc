@@ -50,7 +50,7 @@ configureGit() {
 			echo "Git version greater than $requiredver"
 		else
 			echo "Found git version less than $requiredver, wrapping status save with status push."
-			echo "source ~/.config/gitrc" >> ~/.config/scottrc
+			echo "source ~/.config/gitrc" >> ~/.bashrc
 		fi
 
 	else
