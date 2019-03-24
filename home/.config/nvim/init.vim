@@ -49,7 +49,10 @@ function! RemoveWhiteSpace()
 	call setreg("/", oldQuery)
 endfunction
 
-autocmd BufWritePre * :call RemoveWhiteSpace()
+augroup Vanilla
+	autocmd!
+	autocmd BufWritePre * :call RemoveWhiteSpace()
+augroup END
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
@@ -81,7 +84,10 @@ function! DetectDotfilesFolder()
 		let g:ctrlp_user_command = g:ctrlp_user_command . ' --hidden'
 	endif
 endfunction
-autocmd VimEnter * :call DetectDotfilesFolder()
+augroup AugmentCtrlP
+	autocmd!
+	autocmd VimEnter * :call DetectDotfilesFolder()
+augroup END
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
@@ -120,8 +126,11 @@ function! OpenNerdTreeOnEnter()
 		NERDTree
 	endif
 endfunction
-autocmd VimEnter * :call OpenNerdTreeOnEnter()
-autocmd BufReadPre * :NERDTreeClose
+augroup AugmentNerdTree
+	autocmd!
+	autocmd VimEnter * :call OpenNerdTreeOnEnter()
+	autocmd BufReadPre * :NERDTreeClose
+augroup END
 " syntastic
 " vim-fugitive
 nnoremap <leader>gs :Gstatus<CR>
