@@ -1,5 +1,6 @@
 set background=dark
 set encoding=utf-8
+set formatoptions='tqj'
 set hidden
 " no need for showmode while using lightline
 set modelines=0
@@ -46,6 +47,8 @@ inoremap jk <ESC>
 " swap ; with :, I use ex command much more often than ;
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
