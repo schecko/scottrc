@@ -1,6 +1,6 @@
 set background=dark
 set encoding=utf-8
-set formatoptions='tqj'
+set formatoptions=tqj
 set hidden
 " no need for showmode while using lightline
 set modelines=0

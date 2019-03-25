@@ -2,6 +2,10 @@
 BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
 
 clean() {
+	echo
+	echo "Removing old installation"
+	echo
+
 	rm -rf ~/.config/nvim/
 	rm -rf ~/.config/i3/
 	rm -f ~/.config/scottrc
@@ -13,18 +17,19 @@ clean() {
 
 baseInstall() {
 	echo
-	echo "Copying fresh scottrc"
+	echo "Copying dotfiles"
 	echo
+	SOURCE=$1
 
 	shopt -s dotglob
-	cp -r ~/src/scottrc/home/* ~/
+	cp -r $SOURCE/home/* ~/
 	shopt -u dotglob
 }
 
 configureNeovim() {
-	###
-	# vim
-	###
+	echo
+	echo "Configuring vim"
+	echo
 
 	mkdir -p ~/.config/nvim/plugged/youcompleteme
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
@@ -36,9 +41,10 @@ configureNeovim() {
 }
 
 configureGit() {
-	###
-	# git
-	###
+	echo
+	echo "Configuring git"
+	echo
+
 	gitversionfull=($(git --version))
 	if [[ $? -eq 0 ]]; then
 		echo "Found a valid git installation"
@@ -58,12 +64,13 @@ configureGit() {
 	fi
 }
 
-
 if [[ $1 == "quick" || $1 == "q" ]]; then
-	baseInstall
+	# expects scottrc to be located here, 
+	# allows quick to be executed from anywhere
+	baseInstall /home/scott/src/scottrc
 else
 	clean
-	baseInstall
+	baseInstall .
 	configureNeovim
 	configureGit
 fi
