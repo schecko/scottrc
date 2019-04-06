@@ -44,11 +44,12 @@ nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1
 nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
 inoremap jk <ESC>
+" hard to use this setting in docker... maybe one day
 " swap ; with :, I use ex command much more often than ;
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
+" nnoremap ; :
+" nnoremap : ;
+" vnoremap ; :
+" vnoremap : ;
 
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
