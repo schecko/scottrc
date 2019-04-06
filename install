@@ -17,7 +17,7 @@ installGnome() {
 }
 
 installi3() {
-	apt-get install 
+	apt-get install \
 		i3 --no-install-recommends xorg xinit feh \
 		-y
 }
@@ -65,18 +65,18 @@ do
 		installBase
 		buildNeovim
 		installi3
-	elsif [[ $ARG == "gnome" ]]; then
+	elif [[ $ARG == "gnome" ]]; then
 		installBase
 		buildNeovim
 		installGnome
-	elsif [[ $ARG == "full" ]]; then
+	elif [[ $ARG == "full" ]]; then
 		installBase
 		buildNeovim
 		installGnome
 		installi3
-	elsif [[ $ARG == "vmw" ]] || [[ $ARG == "vmware" ]]; then
+	elif [[ $ARG == "vmw" ]] || [[ $ARG == "vmware" ]]; then
 		installVmware
-	elsif [[ $ARG == "vb" ]] || [[ $ARG == "virtualbox" ]]; then
+	elif [[ $ARG == "vb" ]] || [[ $ARG == "virtualbox" ]]; then
 		installVirtualbox
 	fi
 done
