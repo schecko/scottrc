@@ -5,8 +5,8 @@ installBase() {
 	apt-get update
 	apt-get upgrade
 	apt-get install build-essential git cmake python3-pip curl \
-		python3-dev sudo \
-		firefox-esr terminator sudo thefuck exuberant-ctags silversearcher-ag \
+		python3-dev sudo rxvt-unicode-256color \
+		firefox-esr thefuck exuberant-ctags silversearcher-ag \
 		-y
 }
 
@@ -34,7 +34,7 @@ installVirtualbox() {
 		build-essential module-assistant \
 		-y
 	m-a prepare
-	
+
 	bash /media/cdrom/VBoxLinuxAdditions.run
 }
 
@@ -61,7 +61,9 @@ buildNeovim() {
 
 for ARG in "$@"
 do
-	if [[ $ARG == "i3" ]]; then
+	if [[ $ARG == "base" ]]; then
+		installBase
+	elif [[ $ARG == "i3" ]]; then
 		installBase
 		buildNeovim
 		installi3
