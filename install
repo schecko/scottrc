@@ -1,29 +1,82 @@
 #!/bin/bash
 set -e
 
-apt-get update
-apt-get upgrade
-apt-get install build-essential git cmake python3-pip curl \
-	python3-dev sudo \
-	firefox-esr terminator sudo thefuck exuberant-ctags silversearcher-ag \
-	gnome-shell i3 feh \
-	-y
+installBase() {
+	apt-get update
+	apt-get upgrade
+	apt-get install build-essential git cmake python3-pip curl \
+		python3-dev sudo \
+		firefox-esr terminator sudo thefuck exuberant-ctags silversearcher-ag \
+		-y
+}
 
-# neovim build prereqs
-# build neovim from scratch for newer features
-apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+installGnome() {
+	apt-get install
+		gnome-shell \
+		-y
+}
 
-mkdir -p ~/src
-pushd ~/src
-#ignore clone fails if the repo is already there
-git clone --single-branch --branch v0.3.4 https://github.com/neovim/neovim || true
-pushd neovim
-rm -rf build
-make clean
-make CMAKE_BUILD_TYPE=Release
-make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=/opt/neovim"
-make install
+installi3() {
+	apt-get install 
+		i3 --no-install-recommends xorg xinit feh \
+		-y
+}
 
-[[ $PATH != *"/opt/neovim/bin"* ]] && export PATH="/opt/neovim/bin:$PATH"
-popd
-popd
+installVmware() {
+	apt-get install 
+		open-vm-tools open-vm-tools-desktop \
+		-y
+}
+
+installVirtualbox() {
+	# assumes the virtualbox installation media is already inserted into the virtualmachine
+	apt-get install
+		build-essential module-assistant
+		-y
+	m-a prepare
+	
+	bash /media/cdrom/VBoxLinuxAdditions.run
+}
+
+buildNeovim() {
+	# neovim build prereqs
+	# build neovim from scratch for newer features
+	apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+
+	mkdir -p ~/src
+	pushd ~/src
+		#ignore clone fails if the repo is already there
+		git clone --single-branch --branch v0.3.4 https://github.com/neovim/neovim || true
+		pushd neovim
+			rm -rf build
+			make clean
+			make CMAKE_BUILD_TYPE=Release
+			make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=/opt/neovim"
+			make install
+
+			[[ $PATH != *"/opt/neovim/bin"* ]] && export PATH="/opt/neovim/bin:$PATH"
+		popd
+	popd
+}
+
+for ARG in "$@"
+do
+	if [[ $ARG == "i3" ]]; then
+		installBase
+		buildNeovim
+		installi3
+	elsif [[ $ARG == "gnome" ]]; then
+		installBase
+		buildNeovim
+		installGnome
+	elsif [[ $ARG == "full" ]]; then
+		installBase
+		buildNeovim
+		installGnome
+		installi3
+	elsif [[ $ARG == "vmw" ]] || [[ $ARG == "vmware" ]]; then
+		installVmware
+	elsif [[ $ARG == "vb" ]] || [[ $ARG == "virtualbox" ]]; then
+		installVirtualbox
+	fi
+done
