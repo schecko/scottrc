@@ -23,14 +23,14 @@ installi3() {
 }
 
 installVmware() {
-	apt-get install 
+	apt-get install \
 		open-vm-tools open-vm-tools-desktop \
 		-y
 }
 
 installVirtualbox() {
 	# assumes the virtualbox installation media is already inserted into the virtualmachine
-	apt-get install
+	apt-get install \
 		build-essential module-assistant
 		-y
 	m-a prepare
