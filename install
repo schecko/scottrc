@@ -11,7 +11,7 @@ installBase() {
 }
 
 installGnome() {
-	apt-get install
+	apt-get install \
 		gnome-shell \
 		-y
 }
