@@ -10,7 +10,9 @@ URxvt*shading: 40
 !URxvt*scrollTtyKeypress: true
 
 ! font
-!URxvt.font: Monospace-14
+URxvt.font: xft:Hack-Regular:pixelsize=14,xft:Symbola
+URxvt.boldFont: xft:Hack-Bold:pixelsize=14:weight=bold,xft:Symbola
+URxvt.italicFont: xft:Hack-RegularOblique:pixelsize=14:slant=italic,xft:Symbola
 
 ! color
 *.color0: #1d2021
