@@ -3,3 +3,21 @@
 [user]
 	email = "scott.checko@hotmail.com"
 	name = "Scott Checko"
+[alias]
+	a = add
+	aa = add --all
+	b = branch
+	ba = branch --all
+	bm = branch --merged
+	ca = commit --amend
+	ch = checkout
+	cm = !git commit -m $1 && :
+	co = commit
+	d = diff
+	dc = diff --cached
+	m = merge
+	p = push
+	rh = reset --hard HEAD~1
+	rs = reset --soft HEAD~1
+	s = status
+

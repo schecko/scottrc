@@ -65,7 +65,6 @@ augroup Vanilla
 augroup END
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -81,25 +80,6 @@ Plug 'vim-scripts/Conque-GDB'
 Plug 'xolox/vim-easytags' "Depends on vim-misc!
 Plug 'xolox/vim-misc'
 call plug#end()
-
-" ctrlp.vim
-let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore ".git" -g ""'
-function! DetectDotfilesFolder()
-	" detect if the current folder contains this repo, if it does then
-	" let ctrlp search for dotfiles as well as normal files.
-	" autocmd folder specification does not work well for this case
-	" as it only checks against subfolders. ie specifying ~/src/scottrc/*
-	" will not work if nvim is opened with no arguments within the ~/src/scottrc.
-	if getcwd() =~? ".*scottrc.*"
-		let g:ctrlp_user_command = g:ctrlp_user_command . ' --hidden'
-	endif
-endfunction
-augroup AugmentCtrlP
-	autocmd!
-	autocmd VimEnter * :call DetectDotfilesFolder()
-augroup END
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " vim-easygrep
 let g:EasyGrepCommand = "ag"
@@ -122,6 +102,23 @@ let g:lightline = {
 \}
 
 " fzf.vim
+let $FZF_DEFAULT_COMMAND = 'ag --ignore .git -l -g ""'
+function! DetectDotfilesFolder()
+	" detect if the current folder contains this repo, if it does then
+	" let fzf search for dotfiles as well as normal files.
+	" autocmd folder specification does not work well for this case
+	" as it only checks against subfolders. ie specifying ~/src/scottrc/*
+	" will not work if nvim is opened with no arguments within ~/src/scottrc.
+	if getcwd() =~? ".*scottrc.*"
+		let $FZF_DEFAULT_COMMAND = $FZF_DEFAULT_COMMAND . ' --hidden'
+	endif
+endfunction
+augroup AugmentFZF
+	autocmd!
+	autocmd VimEnter * :call DetectDotfilesFolder()
+augroup END
+nnoremap <silent> <expr> <c-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+
 " tagbar
 " ack.vim
 let g:gackprg = "ag --vimgrep --hidden"
