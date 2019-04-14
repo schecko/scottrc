@@ -64,14 +64,14 @@ configureGit() {
 	fi
 }
 
-if [[ $1 == "quick" || $1 == "q" ]]; then
-	# expects scottrc to be located here, 
-	# allows quick to be executed from anywhere
-	baseInstall /home/scott/src/scottrc
-else
+if [[ $1 == "full" ]]; then
 	clean
 	baseInstall .
 	configureNeovim
 	configureGit
+else
+	# expects scottrc to be located here,
+	# allows quick to be executed from anywhere
+	baseInstall /home/scott/src/scottrc
 fi
 
