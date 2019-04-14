@@ -97,6 +97,10 @@ fi
 
 alias la='ls -a --color=auto'
 alias ll='ls -l --color=auto'
+function mcd() {
+	mkdir $1
+	cd $1
+}
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias reload="~/src/scottrc/setup q"
 
