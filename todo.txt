@@ -1,0 +1,3 @@
+
+- vim: Find or make a way to skip over search entries to the next entry that isn't in the view. ie when browsing search
+results, remove the necessity of pressing 'n' a bunch of times to move the view.
