@@ -61,8 +61,8 @@ endfunction
 
 augroup Vanilla
 	autocmd!
-	" resize the windows when the screen is changed
-	autocmd VimResized * exe "normal \<c-w>="
+	" resize windows when the screen changes
+	autocmd VimResized * exe "normal! \<c-w>="
 	autocmd BufWritePre * :call RemoveWhiteSpace()
 augroup END
 
