@@ -1,6 +1,6 @@
 set background=dark
 set encoding=utf-8
-set formatoptions=tqj
+set formatoptions=tj
 set hidden
 " no need for showmode while using lightline
 set modelines=0
@@ -19,8 +19,26 @@ set wildmenu
 set wildmode=longest:full,full
 set wrap
 
+" backups
+set backupdir=.backup/,~/.backup/,/tmp//
+set directory=.swp/,~/.swp/,/tmp//
+set undodir=.undo/,~/.undo/,/tmp//
+
 let mapleader = " "
 let g:grepprg = "ag --nogroup --nocolor"
+
+if has("win32")
+	for bash in [ "D:/apps/Git/git-cmd.exe", "/bin/bash" ]
+		set shell=bash
+		:call system(&shell)
+		if !v:shell_error
+			break;
+		endif
+	endfor
+else
+	set shell=/bin/bash
+endif
+
 
 syntax on
 filetype on
@@ -51,6 +69,11 @@ inoremap jk <ESC>
 " vnoremap ; :
 " vnoremap : ;
 
+nnoremap <silent> <leader>bl :.w !bash<CR>
+nnoremap <silent> <leader>ba :%w !bash<CR>
+
+tnoremap <ESC> <c-\><c-n>
+
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
 	let oldQuery = getreg("/")
@@ -68,17 +91,17 @@ augroup END
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'dkprice/vim-easygrep'
+Plug 'huawenyu/neogdb.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
+Plug 'schecko/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'schecko/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
-Plug 'vim-scripts/Conque-GDB'
 Plug 'xolox/vim-easytags' "Depends on vim-misc!
 Plug 'xolox/vim-misc'
 call plug#end()
@@ -152,7 +175,6 @@ nnoremap <leader>gb :GBlame<CR>
 " youcompleteme
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
-" Conque-GDB
 " vim-easytags
 let g:easytags_async = 1
 

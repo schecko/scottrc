@@ -101,6 +101,10 @@ function mcd() {
 	mkdir $1
 	cd $1
 }
+function cd() {
+	command cd $1
+	ls
+}
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias reload="~/src/scottrc/setup q"
 
