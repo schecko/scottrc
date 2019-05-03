@@ -28,11 +28,15 @@ let mapleader = " "
 let g:grepprg = "ag --nogroup --nocolor"
 
 if has("win32")
-	for bash in [ "D:/apps/Git/git-cmd.exe", "/bin/bash" ]
-		set shell=bash
-		:call system(&shell)
+	for bash in [ "C:/Program Files/Git/bin/bash.exe", "/bin/bash" ]
+		let command=bash." --version"
+		echom "command is:".command
+		call system(command)
+		echom "shell error is"
+		echom v:shell_error
 		if !v:shell_error
-			break;
+			let &shell=bash
+			break
 		endif
 	endfor
 else

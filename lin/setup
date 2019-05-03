@@ -1,14 +1,6 @@
 #!/bin/bash
 BASHRC_LAST_LINE=$(grep "." ~/.bashrc | tail -1)
 
-UNAME=$(uname -s)
-case $UNAME in
-	Linux*) PLATFORM="LINUX";;
-	CYGWIN*) PLATFORM="CYGWIN";;
-	MINGW*) PLATFORM="MINGW";;
-	*) PLATFORM="UNKOWN";;
-esac
-
 clean() {
 	echo "Removing old installation"
 
@@ -71,7 +63,7 @@ configureGit() {
 
 if [[ $1 == "full" ]]; then
 	clean
-	baseInstall .
+	baseInstall ..
 	configureNeovim
 	configureGit
 else

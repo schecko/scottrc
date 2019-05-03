@@ -40,8 +40,11 @@ function configureNeovim() {
 	popd
 }
 
+rm -force "~/.bash_profile"
+new-item -itemtype SymbolicLink -Name "~\.bash_profile" -Target "~\.bashrc"
+#cmd /c mklink "~/.bash_profile" "~/.bashrc"
 
-if ($type -eq "full") { 
+if ($type -eq "full") {
 	clean
 	baseInstall ..
 	configureNeovim

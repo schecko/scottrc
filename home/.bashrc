@@ -119,4 +119,13 @@ if [[ $? != 0 ]]; then
 	alias vim='nvim'
 fi
 
+fzf() {
+	local temp_term=$TERM
+	export TERM=''
+	echo "term is : $TERM"
+	fzf ${@@Q}
+	echo "term is : $TERM"
+	export TERM=$temp_term
+}
+
 eval $(thefuck --alias)
