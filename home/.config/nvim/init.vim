@@ -30,7 +30,7 @@ let g:grepprg = "ag --nogroup --nocolor"
 if has("win32")
 	for shell in [ $SCOOP_GLOBAL . "/apps/msys2/current/usr/bin/bash.exe", "/bin/bash" ]
 		let command=shell." --version"
-		call system(shell)
+		call system(command)
 		if !v:shell_error
 			let &shell=shell
 			break
