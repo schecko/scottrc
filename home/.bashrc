@@ -112,7 +112,12 @@ function mcd() {
 }
 function cd() {
 	command cd $1
-	ls
+	ls | head -n 20
+	dir_out=$(ls --color=always)
+	printf "$dir_out" | head -n 20
+	if [[ $(printf "$dir_out" | wc -l) -gt 20 ]]; then
+		printf "\033[0;31mlist incomplete\033[0m"
+	fi
 }
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias reload="~/src/scottrc/setup q"
