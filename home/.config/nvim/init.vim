@@ -28,21 +28,17 @@ let mapleader = " "
 let g:grepprg = "ag --nogroup --nocolor"
 
 if has("win32")
-	for bash in [ "C:/Program Files/Git/bin/bash.exe", "/bin/bash" ]
-		let command=bash." --version"
-		echom "command is:".command
-		call system(command)
-		echom "shell error is"
-		echom v:shell_error
+	for shell in [ $SCOOP_GLOBAL . "/apps/msys2/current/usr/bin/bash.exe", "/bin/bash" ]
+		let command=shell." --version"
+		call system(shell)
 		if !v:shell_error
-			let &shell=bash
+			let &shell=shell
 			break
 		endif
 	endfor
 else
 	set shell=/bin/bash
 endif
-
 
 syntax on
 filetype on
