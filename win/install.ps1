@@ -91,10 +91,14 @@ try {
 $env:SCOOP_GLOBAL="D:/apps/scoop"
 [environment]::setEnvironmentVariable('SCOOP_GLOBAL', $env:SCOOP_GLOBAL, 'Machine')
 scoop bucket add extras
-scoop install -g python neovim msys2 vscode ag fzf
+scoop install -g python neovim msys2 vscode cmake git ag
 
-function makeShortcut($name, $exe) {
-	$TargetFile = "$env:SCOOP_GLOBAL\apps\$name\current\$exe.exe"
+# tell msys to use the windows path
+$env:MSYS2_PATH_TYPE="inherit"
+[environment]::setEnvironmentVariable('MSYS2_PATH_TYPE', $env:MSYS2_PATH_TYPE, "User")
+
+function makeShortcut([string]$name, [string]$exe, [string]$icon = '') {
+	$TargetFile = "$env:SCOOP_GLOBAL\shims\$exe"
 	$ShortcutFile = "$env:Public\Desktop\$name.lnk"
 	$WScriptShell = New-Object -ComObject WScript.Shell
 	$Shortcut = $WScriptShell.CreateShortcut($ShortcutFile)
@@ -102,19 +106,8 @@ function makeShortcut($name, $exe) {
 	$Shortcut.Save()
 }
 
-makeShortcut msys2 msys2
+# tell msys2 to inherit the full windows path
+makeShortcut msys2 msys2_shell.cmd msys2.ico
 
-# choco installation
-$env:ChocolateyInstall="D:/apps/choco"
-[environment]::setEnvironmentVariable('ChocolateyInstall', $env:ChocolateyInstall, 'Machine')
-$env:ChocolateyToolsLocation="D:/apps/chocotools"
-[environment]::setEnvironmentVariable('ChocolateyToolsLocation', $env:ChocolateyToolsLocation, "User")
-#new-item -force -itemtype "Directory" $env:ChocolateyToolsLocation
-try {
-	iex ((new-object net.WebClient).downloadstring('https://chocolatey.org/install.ps1')) -EA SilentlyContinue
-} catch {
-	echo "choco install error: " + $_Exception.Message
-}
-
-choco install git --params "/GitOnlyOnPath" -y
+pip install thefuck
 
