@@ -11,7 +11,6 @@ function clean() {
 	rm -f ~/.gitconfig
 	rm -f ~/.vimrc
 	rm -f ~/.bashrc
-	rm -r -f ~/AppData/Local/nvim/
 	rm -f ~/.bash_profile
 }
 
@@ -36,6 +35,7 @@ function baseInstall() {
 function configureNeovim() {
 	echo "Configuring vim"
 
+	rm -f ~/AppData/Local/nvim
 	mkdir -p ~/.config/nvim/plugged/youcompleteme
 
 	ln -sd "$HOME/.config/nvim/" "$HOME/AppData/Local/"
@@ -58,6 +58,5 @@ elif [[ $1 == "clean" ]]; then
 else
 	# expects scottrc to be located here,
 	# allows quick to be executed from anywhere
-	clean
 	baseInstall D:/src/scottrc
 fi

@@ -27,19 +27,6 @@ set undodir=.undo/,~/.undo/,/tmp//
 let mapleader = " "
 let g:grepprg = "ag --nogroup --nocolor"
 
-if has("win32")
-	for shell in [ $SCOOP_GLOBAL . "/apps/msys2/current/usr/bin/bash.exe", "/bin/bash" ]
-		let command=shell." --version"
-		call system(command)
-		if !v:shell_error
-			let &shell=shell
-			break
-		endif
-	endfor
-else
-	set shell=/bin/bash
-endif
-
 syntax on
 filetype on
 colorscheme desert
@@ -84,6 +71,10 @@ endfunction
 
 augroup Vanilla
 	autocmd!
+	if has("win32")
+		autocmd VimEnter * cd D:/src/
+	endif
+
 	" resize windows when the screen changes
 	autocmd VimResized * exe "normal! \<c-w>="
 	autocmd BufWritePre * :call RemoveWhiteSpace()
@@ -127,8 +118,8 @@ let g:lightline = {
 \}
 
 " fzf.vim
-let $FZF_DEFAULT_COMMAND = 'ag --ignore .git -l -g ""'
 function! DetectDotfilesFolder()
+	let $FZF_DEFAULT_COMMAND = 'ag --ignore .git -l -g ""'
 	" detect if the current folder contains this repo, if it does then
 	" let fzf search for dotfiles as well as normal files.
 	" autocmd folder specification does not work well for this case
@@ -140,7 +131,7 @@ function! DetectDotfilesFolder()
 endfunction
 augroup AugmentFZF
 	autocmd!
-	autocmd VimEnter * :call DetectDotfilesFolder()
+	autocmd VimEnter,DirChanged * :call DetectDotfilesFolder()
 augroup END
 nnoremap <silent> <expr> <c-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
 
