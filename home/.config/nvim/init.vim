@@ -1,14 +1,13 @@
 set background=dark
+set clipboard=unnamedplus
 set encoding=utf-8
 set formatoptions=tj
 set hidden
-" no need for showmode while using lightline
-set modelines=0
+set modelines=0 " no need for showmode while using lightline
 set nocompatible
 set noshowmode
 set number relativenumber
-" always keep lines visible above/below the cursor
-set scrolloff=10
+set scrolloff=10 " always keep lines visible above/below the cursor
 set shiftwidth=4
 set showcmd
 set splitbelow
