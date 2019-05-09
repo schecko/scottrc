@@ -4,7 +4,7 @@ set -e
 installBase() {
 	apt-get update -y
 	apt-get upgrade -y
-	apt-get install build-essential git cmake python3-pip curl \
+	apt-get install build-essential git cmake python3-pip curl xsel \
 		python3-dev sudo rxvt-unicode-256color \
 		firefox-esr thefuck exuberant-ctags silversearcher-ag \
 		fonts-hack-ttf \
