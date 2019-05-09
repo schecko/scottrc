@@ -1,5 +1,5 @@
 set background=dark
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set encoding=utf-8
 set formatoptions=tj
 set hidden
@@ -47,7 +47,7 @@ nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1
 " toggle search highlighting
 nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
-inoremap jk <ESC>
+inoremap jk <ESC>:w<CR>
 " hard to use this setting in docker... maybe one day
 " swap ; with :, I use ex command much more often than ;
 " nnoremap ; :
