@@ -58,7 +58,6 @@ MSYS*|MINGW*)
 	PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
 ;;
 *)
-	echo that
 	if [ "$color_prompt" = yes ]; then
 		PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 	else
@@ -115,6 +114,7 @@ function cd() {
 	if [[ $(printf "$dir_out" | wc -l) -gt 20 ]]; then
 		printf "\033[0;31mlist incomplete\033[0m"
 	fi
+	printf "\n"
 }
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias reload="~/src/scottrc/setup q"
