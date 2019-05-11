@@ -143,14 +143,8 @@ function! DetectEmptyBuffer()
 	return line("$") == 1 && getline(1) == ""
 endfunction
 
-function! OpenNerdTreeOnEnter()
-	if DetectEmptyBuffer()
-		NERDTree
-	endif
-endfunction
 augroup AugmentNerdTree
 	autocmd!
-	autocmd VimEnter * :call OpenNerdTreeOnEnter()
 	autocmd BufReadPre * :NERDTreeClose
 augroup END
 " syntastic
