@@ -106,7 +106,6 @@ function makeShortcut([string]$name, [string]$exe, [string]$icon = '') {
 	$Shortcut.Save()
 }
 
-# tell msys2 to inherit the full windows path
 makeShortcut msys2 msys2_shell.cmd msys2.ico
 
 pip install thefuck
