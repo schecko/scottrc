@@ -7,8 +7,9 @@ installBase() {
 	apt-get install build-essential git cmake python3-pip curl xsel \
 		python3-dev sudo rxvt-unicode-256color \
 		firefox-esr thefuck exuberant-ctags silversearcher-ag \
-		fonts-hack-ttf \
+		fonts-hack-ttf youtube-dl \
 		-y
+	pip3 install lz4 # allows parsing of mozilla's modified json format
 }
 
 installGnome() {

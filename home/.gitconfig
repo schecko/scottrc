@@ -1,7 +1,7 @@
 [core]
 	editor = 'nvim'
 [user]
-	email = "scott.checko@hotmail.com"
+	email = "schecko@sfu.ca"
 	name = "Scott Checko"
 [alias]
 	a = add
