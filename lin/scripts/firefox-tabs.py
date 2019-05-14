@@ -2,17 +2,16 @@
 import json
 import glob
 import logging
+import os
+import difflib
 
 try:
     import lz4.block as lz4
 except ImportError:
     import lz4
 
-logging.basicConfig(level=logging.INFO)
-
-session_file_glob = glob.glob("/home/scott/.mozilla/firefox/*.default/sessionstore-backups/recovery.json*")
-logging.info("searching in files: {}".format(session_file_glob))
-print("\n\n\n\n")
+active_urls = []
+session_file_glob = glob.glob(os.path.expanduser("~") + "/.mozilla/firefox/*.default/sessionstore-backups/recovery.json*")
 for session_file in session_file_glob:
     session_contents = open(session_file, 'rb')
     session_json = None
@@ -23,21 +22,26 @@ for session_file in session_file_glob:
     session = json.loads(session_json.decode('utf-8'))
     session_contents.close()
 
-    print("\n")
     for session_file in session_file_glob:
-        for window in session.get("windows"):
-            selected_tab = window.get("selected") - 1
-            print("tab length {}".format(len(window.get("tabs"))))
-            print("hello {}".format(window.get("tabs")[selected_tab].get("attributes")))
-            #active_tab = window.get("tabs")[window.get("selected")]
+        for window_index, window in enumerate(session.get("windows")):
+            selected_tab_index = window.get("selected") - 1
+            # note that the selected tab is only updated on page refresh or new page.
+            selected_tab = window.get("tabs")[selected_tab_index]
 
-    selected_window = 0
-    if session["windows"][0]["selected"] is not None:
-        selected_window = session["windows"][0]["selected"]
-        logging.info("selected window is: {}".format(selected_window))
-    else:
-        logging.info("window {} did not have a selected window".format(selected_window))
+            # entries represents the history for a given tab
+            # the last element in the list seems to be the most recent entry
+            # could be verified through the timestamp?
+            history = selected_tab.get("entries")
+            active_urls.append(history[-1].get("url"))
+
+if len(active_urls) > 0:
+    # choose the best url
+    close_matches = difflib.get_close_matches("youtube", active_urls, n=1, cutoff=0.3)
+    # TODO something better than just the first one?
+    if len(close_matches) > 0:
+        print(close_matches[0])
 else:
-    logging.error("Could not find recovery file to parse, there is likely no running firefox process")
+    logging.error("could not find any youtube urls")
+
 
 
