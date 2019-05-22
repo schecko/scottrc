@@ -74,6 +74,8 @@ augroup Vanilla
 		autocmd VimEnter * cd D:/src/
 	endif
 
+	autocmd FileType tex,latex let &makeprg="pdflatex %"
+
 	" resize windows when the screen changes
 	autocmd VimResized * exe "normal! \<c-w>="
 	autocmd BufWritePre * :call RemoveWhiteSpace()
