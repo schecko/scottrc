@@ -1,6 +1,7 @@
 set background=dark
 set clipboard+=unnamedplus
 set encoding=utf-8
+set exrc " per-folder vimrc
 set formatoptions=tj
 set hidden
 set modelines=0 " no need for showmode while using lightline
@@ -8,6 +9,7 @@ set nocompatible
 set noshowmode
 set number relativenumber
 set scrolloff=10 " always keep lines visible above/below the cursor
+set secure " for exrc
 set shiftwidth=4
 set showcmd
 set splitbelow
