@@ -5,23 +5,19 @@ installBase() {
 	apt-get update -y
 	apt-get upgrade -y
 	apt-get install build-essential git cmake python3-pip curl xsel \
-		python3-dev sudo rxvt-unicode-256color \
-		firefox-esr thefuck exuberant-ctags silversearcher-ag \
+		python3-dev sudo \
+		thefuck exuberant-ctags silversearcher-ag \
 		fonts-hack-ttf youtube-dl \
 		-y
-	pip3 install lz4 # allows parsing of mozilla's modified json format
 }
 
-installGnome() {
-	apt-get install \
+installGUI() {
+	apt-get install rxvt-unicode-256color \
+		firefox-esr fonts-hack-ttf youtube-dl \
+		i3 --no-install-recommends i3status i3lock dmenu dunst xorg xinit feh \
 		gnome-shell \
 		-y
-}
-
-installi3() {
-	apt-get install \
-		i3 --no-install-recommends i3status i3lock dmenu dunst xorg xinit feh lightdm \
-		-y
+	pip3 install lz4 # allows parsing of mozilla's modified json format
 }
 
 installVmware() {
@@ -65,19 +61,11 @@ for ARG in "$@"
 do
 	if [[ $ARG == "base" ]]; then
 		installBase
-	elif [[ $ARG == "i3" ]]; then
-		installBase
 		buildNeovim
-		installi3
-	elif [[ $ARG == "gnome" ]]; then
-		installBase
-		buildNeovim
-		installGnome
 	elif [[ $ARG == "full" ]]; then
 		installBase
+		installGUI
 		buildNeovim
-		installGnome
-		installi3
 	elif [[ $ARG == "vmw" ]] || [[ $ARG == "vmware" ]]; then
 		installVmware
 	elif [[ $ARG == "vb" ]] || [[ $ARG == "virtualbox" ]]; then
