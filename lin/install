@@ -4,16 +4,26 @@ set -e
 installBase() {
 	apt-get update -y
 	apt-get upgrade -y
-	apt-get install build-essential git cmake python3-pip curl xsel \
-		python3-dev sudo \
-		thefuck exuberant-ctags silversearcher-ag \
-		fonts-hack-ttf youtube-dl \
+	NEOVIM="" # dummy variable, neovim is built from source so this just helps indicate what packages it depends on, these are my script dependencies rather than hard neovim dependencies
+	# packages on the same line are dependencies
+	apt-get install \
+		build-essential \
+		git \
+		cmake \
+		curl \
+		xsel \
+		thefuck python3-dev python3-pip python3-setuptools \
+		sudo \
+		$(NEOVIM) exuberant-ctags silversearcher-ag \
+		youtube-dl \
 		-y
 }
 
 installGUI() {
+	# install firefox if on ubuntu, but prefer esr on debian
+	apt install firefox-esr || apt install firefox -y
 	apt-get install rxvt-unicode-256color \
-		firefox-esr fonts-hack-ttf youtube-dl \
+		fonts-hack-ttf youtube-dl \
 		i3 --no-install-recommends i3status i3lock dmenu dunst xorg xinit feh \
 		gnome-shell \
 		-y
@@ -44,7 +54,7 @@ buildNeovim() {
 	mkdir -p ~/src
 	pushd ~/src
 		#ignore clone fails if the repo is already there
-		git clone --single-branch --branch v0.3.4 https://github.com/neovim/neovim || true
+		git clone --single-branch --branch v0.3.7 https://github.com/neovim/neovim || true
 		pushd neovim
 			rm -rf build
 			make clean
@@ -68,6 +78,8 @@ do
 		buildNeovim
 	elif [[ $ARG == "vmw" ]] || [[ $ARG == "vmware" ]]; then
 		installVmware
+	elif [[ $ARG == "neovim" ]]; then
+		buildNeovim
 	elif [[ $ARG == "vb" ]] || [[ $ARG == "virtualbox" ]]; then
 		installVirtualbox
 	fi
