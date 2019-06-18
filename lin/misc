@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# useful commands
+# note $ means that the current line is a command.
+
+# prevent evince from resetting the zoom level every bloody chance it gets...
+#$ gsettings set org.gnome.Evince allow-links-change-zoom false
+
