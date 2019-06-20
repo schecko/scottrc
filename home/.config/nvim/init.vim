@@ -15,7 +15,7 @@ set showcmd
 set splitbelow
 set splitright
 set tabstop=4
-set textwidth=120
+set textwidth=0 " disable newline insertion
 set wildmenu
 set wildmode=longest:full,full
 set wrap
