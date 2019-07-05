@@ -91,7 +91,8 @@ try {
 $env:SCOOP_GLOBAL="D:/apps/scoop"
 [environment]::setEnvironmentVariable('SCOOP_GLOBAL', $env:SCOOP_GLOBAL, 'Machine')
 scoop bucket add extras
-scoop install -g python neovim msys2 vscode cmake git ag
+scoop install -g python neovim msys2 vscode cmake git ag fzf
+scoop install -g extras/vcredist2015 # required by gneovim
 
 # tell msys to use the windows path
 $env:MSYS2_PATH_TYPE="inherit"
