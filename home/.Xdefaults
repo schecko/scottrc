@@ -38,3 +38,6 @@ URxvt*troughColor: #333333
 URxvt*scrollBar_floating: false
 URxvt*scrollBar_right: true
 URxvt*scrollstyle: plain
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
