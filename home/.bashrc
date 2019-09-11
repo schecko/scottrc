@@ -120,17 +120,21 @@ alias update='sudo apt-get update && sudo apt-get upgrade'
 alias reload="~/src/scottrc/setup q"
 
 alias poweroff='systemctl poweroff'
-alias shutdown='systemctl poweroff'
-alias restart='systemctl restart'
-alias sleep='systemctl suspend'
 alias reboot='systemctl reboot'
+alias restart='systemctl restart'
+alias shutdown='systemctl poweroff'
+alias sleep='systemctl suspend'
 
-alias gc='git commit'
 alias ga='git add'
-alias gs='git status'
 alias gb='git branch'
+alias gc='git commit'
+alias gch='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gm='git merge'
+alias gp='git push'
+alias gs='git status'
+alias gv='git pull' # v is down arrow
 
 command vim --version > /dev/null 2>&1
 if [[ $? != 0 ]]; then
