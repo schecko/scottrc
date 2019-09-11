@@ -125,6 +125,13 @@ alias restart='systemctl restart'
 alias sleep='systemctl suspend'
 alias reboot='systemctl reboot'
 
+alias gc='git commit'
+alias ga='git add'
+alias gs='git status'
+alias gb='git branch'
+alias gd='git diff'
+alias gdc='git diff --cached'
+
 command vim --version > /dev/null 2>&1
 if [[ $? != 0 ]]; then
 	alias vim='nvim'
