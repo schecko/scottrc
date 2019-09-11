@@ -131,8 +131,9 @@ alias gc='git commit'
 alias gch='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gp='git pull'
+alias gp='git push'
 alias gs='git status'
+alias gv='git pull' # v is down arrow
 
 command vim --version > /dev/null 2>&1
 if [[ $? != 0 ]]; then
