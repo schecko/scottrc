@@ -8,7 +8,7 @@ installBase() {
 	# packages on the same line are dependencies
 	apt install \
 		chkrootkit \
-		clamav \
+		clamav clamav-daemon \
 		build-essential \
 		git \
 		cmake \
