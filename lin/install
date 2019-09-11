@@ -2,11 +2,13 @@
 set -e
 
 installBase() {
-	apt-get update -y
-	apt-get upgrade -y
+	apt update -y
+	apt upgrade -y
 	NEOVIM="" # dummy variable, neovim is built from source so this just helps indicate what packages it depends on, these are my script dependencies rather than hard neovim dependencies
 	# packages on the same line are dependencies
-	apt-get install \
+	apt install \
+		chkrootkit \
+		clamav \
 		build-essential \
 		git \
 		cmake \
@@ -22,7 +24,7 @@ installBase() {
 installGUI() {
 	# install firefox if on ubuntu, but prefer esr on debian
 	apt install firefox-esr || apt install firefox -y
-	apt-get install rxvt-unicode-256color \
+	apt install rxvt-unicode-256color \
 		fonts-hack-ttf youtube-dl \
 		i3 --no-install-recommends i3status i3lock dmenu dunst xorg xinit feh \
 		gnome-shell \
@@ -31,14 +33,14 @@ installGUI() {
 }
 
 installVmware() {
-	apt-get install \
+	apt install \
 		open-vm-tools open-vm-tools-desktop \
 		-y
 }
 
 installVirtualbox() {
 	# assumes the virtualbox installation media is already inserted into the virtualmachine
-	apt-get install \
+	apt install \
 		build-essential module-assistant \
 		-y
 	m-a prepare
@@ -49,7 +51,7 @@ installVirtualbox() {
 buildNeovim() {
 	# neovim build prereqs
 	# build neovim from scratch for newer features
-	apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
+	apt install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
 
 	mkdir -p ~/src
 	pushd ~/src
