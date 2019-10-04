@@ -7,6 +7,7 @@ installBase() {
 	NEOVIM="" # dummy variable, neovim is built from source so this just helps indicate what packages it depends on, these are my script dependencies rather than hard neovim dependencies
 	# packages on the same line are dependencies
 	apt install \
+		texlive-full \
 		chkrootkit \
 		clamav clamav-daemon \
 		build-essential \
