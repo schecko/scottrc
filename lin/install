@@ -55,8 +55,8 @@ buildNeovim() {
 
 	mkdir -p ~/src
 	pushd ~/src
-		#ignore clone fails if the repo is already there
-		git clone --single-branch --branch v0.3.7 https://github.com/neovim/neovim || true
+		rm -r neovim
+		git clone --single-branch --branch v0.4.3 https://github.com/neovim/neovim
 		pushd neovim
 			rm -rf build
 			make clean
