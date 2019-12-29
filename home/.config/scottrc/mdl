@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "downloading song: '$(xsel -b)'"
+((youtube-dl -x --audio-format mp3 --prefer-ffmpeg -o "~/Music/%(title)s-%(alt_title)s-%(artist)s-%(id)s.%(ext)s" $(xsel -b)) && notify-send "successfully downloaded '$(xsel -b)'") || notify-send "failed to download '$(xsel -b)'"

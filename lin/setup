@@ -6,7 +6,7 @@ clean() {
 
 	rm -rf ~/.config/nvim/
 	rm -rf ~/.config/i3/
-	rm -f ~/.config/scottrc
+	rm -rf ~/.config/scottrc/
 	rm -f ~/.config/gitrc
 	rm -f ~/.gitconfig
 	rm -f ~/.vimrc
