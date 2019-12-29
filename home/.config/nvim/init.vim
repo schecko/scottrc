@@ -28,6 +28,10 @@ set undodir=.undo/,~/.undo/,/tmp//
 let mapleader = " "
 let g:grepprg = "ag --nogroup --nocolor"
 
+if has("win32")
+	set shell=powershell
+endif
+
 syntax on
 filetype on
 colorscheme desert
@@ -49,18 +53,12 @@ nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1
 " toggle search highlighting
 nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
-inoremap jk <ESC>:w<CR>
-" hard to use this setting in docker... maybe one day
-" swap ; with :, I use ex command much more often than ;
-" nnoremap ; :
-" nnoremap : ;
-" vnoremap ; :
-" vnoremap : ;
+inoremap jk <ESC>
+tnoremap jk <c-\><c-n>
+tnoremap <ESC> <c-\><c-n>
 
 nnoremap <silent> <leader>bl :.w !bash<CR>
 nnoremap <silent> <leader>ba :%w !bash<CR>
-
-tnoremap <ESC> <c-\><c-n>
 
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
