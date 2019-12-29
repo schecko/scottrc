@@ -28,10 +28,6 @@ set undodir=.undo/,~/.undo/,/tmp//
 let mapleader = " "
 let g:grepprg = "ag --nogroup --nocolor"
 
-if has("win32")
-	set shell=powershell
-endif
-
 syntax on
 filetype on
 colorscheme desert
@@ -74,6 +70,8 @@ augroup Vanilla
 		autocmd VimEnter * cd D:/src/
 	endif
 
+	" automatically start in insert mode when tabbed to a terminal
+	autocmd BufWinEnter,WinEnter,TermOpen term://* startinsert
 	autocmd FileType tex,latex let &makeprg="pdflatex %"
 
 	" resize windows when the screen changes
