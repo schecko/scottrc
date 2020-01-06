@@ -49,18 +49,12 @@ nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1
 " toggle search highlighting
 nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
-inoremap jk <ESC>:w<CR>
-" hard to use this setting in docker... maybe one day
-" swap ; with :, I use ex command much more often than ;
-" nnoremap ; :
-" nnoremap : ;
-" vnoremap ; :
-" vnoremap : ;
+inoremap jk <ESC>
+tnoremap jk <c-\><c-n>
+tnoremap <ESC> <c-\><c-n>
 
 nnoremap <silent> <leader>bl :.w !bash<CR>
 nnoremap <silent> <leader>ba :%w !bash<CR>
-
-tnoremap <ESC> <c-\><c-n>
 
 function! RemoveWhiteSpace()
 	let saveCursor = getpos(".")
@@ -75,6 +69,10 @@ augroup Vanilla
 	if has("win32")
 		autocmd VimEnter * cd D:/src/
 	endif
+
+	" automatically start in insert mode when tabbed to a terminal
+	autocmd BufWinEnter,WinEnter,TermOpen term://* startinsert
+	autocmd FileType tex,latex let &makeprg="pdflatex %"
 
 	" resize windows when the screen changes
 	autocmd VimResized * exe "normal! \<c-w>="
