@@ -116,8 +116,9 @@ function cd() {
 	fi
 	printf "\n"
 }
+
 alias update='sudo apt-get update && sudo apt-get upgrade'
-alias reload="~/src/scottrc/setup q"
+alias reload='~/src/scottrc/lin/setup'
 
 alias poweroff='systemctl poweroff'
 alias reboot='systemctl reboot'
@@ -135,6 +136,9 @@ alias gm='git merge'
 alias gp='git push'
 alias gs='git status'
 alias gv='git pull' # v is down arrow
+
+alias ..='cd ..'
+alias ...='cd ../..'
 
 command vim --version > /dev/null 2>&1
 if [[ $? != 0 ]]; then
