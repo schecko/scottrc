@@ -11,6 +11,7 @@ require "scottrc.treesitter"
 require "scottrc.telescope"
 require "scottrc.bufferline"
 require "scottrc.statusline"
+require "scottrc.toggleterm"
 
 require "scottrc.whichkey"
 

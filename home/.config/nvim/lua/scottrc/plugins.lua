@@ -98,6 +98,13 @@ return packer.startup(function(use)
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
 
+
+	-- Fancy terminal open
+	use {
+		"akinsho/toggleterm.nvim",
+		tag = "2.3.0"
+	}
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
