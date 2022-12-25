@@ -30,6 +30,8 @@ configs.setup({
 	},
 	highlight = {
 		enable = true,
+		-- disable treesitter for nvim help docs, crashes
+		disable = { "help" }
 	},
 	indent = { enable = false },
 })

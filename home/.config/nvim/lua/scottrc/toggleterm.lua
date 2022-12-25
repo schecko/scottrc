@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 toggleterm.setup({
+	dir = vim.g.scottrc_dir,
 	size = 20,
 	open_mapping = [[<c-\>]],
 	hide_numbers = true,
@@ -12,12 +13,13 @@ toggleterm.setup({
 	shading_factor = 2,
 	start_in_insert = true,
 	insert_mappings = true,
+	focusable = true,
 	persist_size = true,
 	direction = "float",
 	close_on_exit = true,
 	shell = vim.o.shell,
 	float_opts = {
-		border = "curved",
+		border = "single",
 		winblend = 0,
 		highlights = {
 			border = "Normal",
@@ -28,9 +30,19 @@ toggleterm.setup({
 
 local Terminal = require("toggleterm.terminal").Terminal
 
-local scratch = Terminal:new({ hidden = true })
+local scratch = Terminal:new({ dir = vim.g.scottrc_dir, hidden = true })
 function _SCRATCH_TOGGLE()
 	scratch:toggle()
+end
+
+local working = Terminal:new({
+	dir = vim.g.scottrc_dir,
+	direction = "horizontal",
+	size = 30,
+	hidden = true,
+})
+function _WORKING_TOGGLE()
+	working:toggle()
 end
 
 local node = Terminal:new({ cmd = "node", hidden = true })
