@@ -88,11 +88,12 @@ try {
 	echo "scoop install error: " + $_.Exception.Message
 	echo $_.Exception
 }
-$env:SCOOP_GLOBAL="D:/apps/scoop"
+$env:SCOOP_GLOBAL="X:/apps/scoop"
 [environment]::setEnvironmentVariable('SCOOP_GLOBAL', $env:SCOOP_GLOBAL, 'Machine')
 scoop bucket add extras
-scoop install -g python neovim msys2 vscode cmake git ag fzf
-scoop install -g extras/vcredist2015 # required by gneovim
+$SCOOP_APPS = "python neovim msys2 vscode cmake git ag fzf neovide python nodejs 7zip gcc helix llvm make extras/vcredist2015"
+scoop install -g $SCOOP_APPS
+scoop update -g $SCOOP_APPS
 
 # tell msys to use the windows path
 $env:MSYS2_PATH_TYPE="inherit"
