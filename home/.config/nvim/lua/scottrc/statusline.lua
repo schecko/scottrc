@@ -3,9 +3,15 @@ if not status then
   return
 end
 
-local custome_theme = require "lualine.themes.nightfly"
-
 status_line.setup{
-	options = { theme = custome_theme },
+	options = {
+		theme = "tokyonight",
+		refresh = {
+		  statusline = 1000,
+		  tabline = 1000,
+		  winbar = 1000,
+		},
+	},
+	extensions = { "toggleterm" },
 }
 
