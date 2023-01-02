@@ -11,9 +11,10 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
+  sync_root_with_cwd = true,
   update_focused_file = {
     enable = true,
-    update_root = true,
+    update_root = false,
   },
   renderer = {
     root_folder_modifier = ":t",

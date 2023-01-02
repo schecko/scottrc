@@ -169,6 +169,7 @@ local mappings = {
     h = { "<cmd>ToggleTerm size=20 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
+  ["<space>"] = { "<cmd>lua _WORKING_TOGGLE()<cr>", "Scratch" },
 }
 
 which_key.setup(setup)

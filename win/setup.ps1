@@ -17,10 +17,12 @@ function clean() {
 	deleteExists ~/.config/gitrc
 	deleteExists ~/.gitconfig
 	deleteExists ~/.vimrc
+	deleteExists $profile
 }
 
 function baseInstall($SOURCE) {
 	copy-item -Force -Recurse -Path $SOURCE/home/* -Destination ~/
+	copy-item -Path $SOURCE/home/profile.ps1 -Destination $profile
 }
 
 clean
