@@ -30,5 +30,3 @@ function crr {
 function cb {
 	& "cargo" "build" @Args
 }
-
-Export-ModuleMember -Function * -Alias *
